@@ -4,6 +4,7 @@ import reset from "styled-reset";
 const GlobalStyle = createGlobalStyle`
   ${reset}
   * {
+    font-family: 'Roboto', sans-serif;
     box-sizing: border-box;
     padding: 0;
     margin: 0;
@@ -17,7 +18,6 @@ const GlobalStyle = createGlobalStyle`
   body {
     width: 100%;
     min-height: 100%;
-    font-family: 'Roboto', sans-serif;
     font-size: 14px;
     line-height: 1.43;
     color: #484848;
