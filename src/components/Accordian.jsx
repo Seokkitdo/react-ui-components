@@ -1,14 +1,19 @@
 import React, { useState, useRef } from "react";
 import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronCircleUp } from "@fortawesome/free-solid-svg-icons";
+import {
+  faChevronCircleUp,
+  faChevronCircleDown,
+} from "@fortawesome/free-solid-svg-icons";
 
 const Accordian = () => {
+  const [show, setShow] = useState(false);
   const [height, setHeight] = useState(0);
   const parentRef = useRef(null);
   const childRef = useRef(null);
   const items = ["accordian", "button", "bento", "breadcrumb"];
   const onClickHandler = (e) => {
+    setShow(!show);
     e.stopPropagation();
     if (parentRef.current.clientHeight === 0) {
       setHeight(275);
@@ -24,7 +29,7 @@ const Accordian = () => {
           <AccordianTitle>Market</AccordianTitle>
           <AccordianItem>
             <AccordianItemTitle>Total Points</AccordianItemTitle>
-            <AccordianItemButton onClick={onClickHandler}>
+            <AccordianItemButton onClick={onClickHandler} show={show}>
               <FontAwesomeIcon icon={faChevronCircleUp} />
             </AccordianItemButton>
           </AccordianItem>
@@ -90,6 +95,8 @@ const AccordianItemTitle = styled.p`
 
 const AccordianItemButton = styled.button`
   font-size: 2.3rem;
+  transform: ${(props) => props.show && "rotate(180deg)"};
+  transition: transform 0.4s ease-in-out;
   color: #525252;
 `;
 
