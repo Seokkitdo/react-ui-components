@@ -4,10 +4,18 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronCircleUp } from "@fortawesome/free-solid-svg-icons";
 
 const Accordian = () => {
-  const [show, setShow] = useState(false);
+  const [height, setHeight] = useState(0);
+  const parentRef = useRef(null);
+  const childRef = useRef(null);
   const items = ["accordian", "button", "bento", "breadcrumb"];
-  const onClickHandler = () => {
-    setShow(!show);
+  const onClickHandler = (e) => {
+    e.stopPropagation();
+    if (parentRef.current.clientHeight === 0) {
+      setHeight(275);
+    } else {
+      setHeight(0);
+    }
+    console.log(parentRef.current.clientHeight);
   };
   return (
     <>
@@ -20,12 +28,15 @@ const Accordian = () => {
               <FontAwesomeIcon icon={faChevronCircleUp} />
             </AccordianItemButton>
           </AccordianItem>
-          <ClickedItemList show={show}>
+          <ClickedItemList ref={parentRef} height={height}>
             {items.map((item, index) => {
-              console.log("index", index);
-              console.log("lastindex", items.length);
               return (
-                <ClickedItem key={index} index={index} lastIndex={items.length}>
+                <ClickedItem
+                  ref={childRef}
+                  key={index}
+                  index={index}
+                  lastIndex={items.length}
+                >
                   {item}
                 </ClickedItem>
               );
@@ -83,18 +94,15 @@ const AccordianItemButton = styled.button`
 `;
 
 const ClickedItemList = styled.div`
-  height: 0;
-  opacity: 0;
+  height: ${(props) => `${props.height}px`};
   overflow: hidden;
-  display: ${(props) => (props.show === true ? "block" : "none")};
   font-size: 2rem;
   width: 100%;
   justify-content: start;
-  padding: 1.5rem 1rem;
   border-radius: 5px;
   color: #525252;
   background-color: #fffffa;
-  transition: all 0.5s ease-in-out;
+  transition: height 0.5s ease;
 `;
 
 const ClickedItem = styled.div`
@@ -102,8 +110,7 @@ const ClickedItem = styled.div`
   width: 100%;
   display: block;
   justify-content: start;
-  padding: ${(props) =>
-    props.index !== props.lastIndex - 1 ? "0 0.5rem 1rem" : "0 0.5rem 0"};
+  padding: 1rem;
   border-radius: 5px;
   color: #525252;
   background-color: #fffffa;
