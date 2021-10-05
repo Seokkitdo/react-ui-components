@@ -1,5 +1,9 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import styled, { css } from "styled-components";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHome } from "@fortawesome/free-solid-svg-icons";
 
 const HamburgerMenu = () => {
   const [open, setOpen] = useState(false);
@@ -7,9 +11,14 @@ const HamburgerMenu = () => {
   const clickHandler = () => {
     setOpen(!open);
   };
-  console.log(open);
+
   return (
     <MenuWrap>
+      <Link to="/">
+        <BackBtn>
+          <FontAwesomeIcon icon={faHome} size="3x" />
+        </BackBtn>
+      </Link>
       <MenuBtn onClick={clickHandler}>
         <MenuBtnBurger open={open}></MenuBtnBurger>
       </MenuBtn>
@@ -19,11 +28,20 @@ const HamburgerMenu = () => {
 
 const MenuWrap = styled.div`
   display: flex;
+  position: relative;
   width: 100vw;
   height: 100vh;
   background-color: #272727;
   justify-content: center;
   align-items: center;
+`;
+
+const BackBtn = styled.button`
+  position: absolute;
+  top: 2rem;
+  left: 2rem;
+  background: transparent;
+  color: #fff;
 `;
 
 const MenuBtn = styled.div`

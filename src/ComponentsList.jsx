@@ -1,10 +1,10 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { keyframes, css } from "styled-components";
 import { Link } from "react-router-dom";
 
 const ComponentsList = () => {
   return (
-    <ListWrap>
+    <ListWrap active>
       <ListItem>
         <Link to="/accordian">Accordian </Link>
       </ListItem>
@@ -14,10 +14,21 @@ const ComponentsList = () => {
     </ListWrap>
   );
 };
-
+const cardFade = keyframes`
+  from { 
+    opacity: 0
+  }
+  to { opacity : 1}
+`;
 const ListWrap = styled.div`
   display: flex;
   padding: 2rem 1rem;
+  ${(props) =>
+    props.active
+      ? css`
+          animation: ${cardFade} 2s;
+        `
+      : ""}
 `;
 
 const ListItem = styled.div`
