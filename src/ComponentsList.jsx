@@ -6,28 +6,29 @@ const ComponentsList = () => {
   return (
     <ListWrap>
       <ListItem>
-        <Link to="/Accordian">Accordian </Link>
+        <Link to="/accordian">Accordian </Link>
+      </ListItem>
+      <ListItem>
+        <Link to="/hamburgerMenu">HamburgerMenu </Link>
       </ListItem>
     </ListWrap>
   );
 };
 
 const ListWrap = styled.div`
-  width: 100vw;
-  padding: 2rem 1rem;
   display: flex;
-  justify-content: center;
+  padding: 2rem 1rem;
 `;
 
 const ListItem = styled.div`
   display: felx;
-  width: 400px;
-  font-size: 6rem;
+  font-size: 2rem;
+  margin: 1rem 1rem;
   justify-content: center;
   align-items: center;
   background-color: skyblue;
   color: #000;
-  border-radius: 50px;
+  border-radius: 15px;
   padding: 1.5rem;
   cursor: pointer;
   &:hover {
